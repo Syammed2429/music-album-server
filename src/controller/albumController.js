@@ -35,6 +35,14 @@ router.get('', async (req, res) => {
 
 })
 
+//get an album by id
+router.get('/:id', async (req, res) => {
+    const album = await Album.findById(req.params.id);
+
+    return res.status(200).send(album)
+})
+
+
 //search the songs
 router.get('/search', async (req, res) => {
     console.log(req.query.q);
