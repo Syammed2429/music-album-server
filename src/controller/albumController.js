@@ -13,7 +13,7 @@ router.post('', async (req, res) => {
     return res.status(201).send(album)
 });
 
-//GET 
+//GET  all albums
 router.get('', async (req, res) => {
     try {
         const page = +req.query.page || 1;
@@ -33,9 +33,17 @@ router.get('', async (req, res) => {
 
     }
 
+})
 
+//search the songs
+router.get('/search', async (req, res) => {
+    console.log(req.query.q);
+    const songs = await Album.find({ name: req.query.q })
 
+    return res.status(200).send(songs)
 
 })
+
+
 
 module.exports = router
