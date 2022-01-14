@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 
-const musicController = require('./controller/musicController')
+const albumController = require('./controller/albumController')
 
 const port = 2924;
 
@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 
-app.use('', musicController)
+app.use('', albumController)
 
 module.exports = {
     port,
