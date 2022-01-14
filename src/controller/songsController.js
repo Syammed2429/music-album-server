@@ -9,7 +9,11 @@ const router = express.Router()
 
 //POST
 router.post('', async (req, res) => {
-    const song = await Song.create(req.body);
+    const songs = await Song.findOne(req.body).lean().exec();
+    if (songs) return res.json({ msg: 'Song is already exists' })
+
+    const song = await Song.create(req.body)
+
 
     return res.status(201).send(song);
 })
