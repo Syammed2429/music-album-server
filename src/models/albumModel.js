@@ -7,7 +7,7 @@ const albumSchema = new mongoose.Schema({
     artist_name: { type: String, required: true },
     genre: { type: String, required: true },
     year: { type: Number, required: true },
-    songs: { type: mongoose.Schema.Types.ObjectId, ref: Song }
+    songs: [{ type: mongoose.Schema.Types.ObjectId, ref: Song }]
 },
     {
         versionKey: false,
