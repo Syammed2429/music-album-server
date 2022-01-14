@@ -15,7 +15,27 @@ router.post('', async (req, res) => {
 
 //GET 
 router.get('', async (req, res) => {
-    return res.status(200).send('Hello')
+    try {
+        const page = +req.query.page || 1;
+        const size = +req.query.limit || 5;
+        const offSet = (page - 1) * size;
+
+        const albums = await Album.find().populate({
+            path: "songs",
+            select: ["name", "duration"],
+        }).limit(size).skip(offSet).lean().exec();
+        const totalAlbums = await Album.find().countDocuments();
+        const totalPages = Math.ceil(totalAlbums / size);
+        return res.status(200).send({ albums, totalPages })
+
+    } catch (e) {
+        console.log('e:', e)
+
+    }
+
+
+
+
 })
 
 module.exports = router
