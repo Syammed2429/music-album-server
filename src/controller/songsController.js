@@ -18,4 +18,11 @@ router.post('', async (req, res) => {
     return res.status(201).send(song);
 })
 
+//Get all songs
+router.get('', async (req, res) => {
+    const songs = await Song.find().lean().exec();
+
+    return res.status(200).send(songs)
+})
+
 module.exports = router;
