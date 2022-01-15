@@ -60,7 +60,11 @@ router.get('', async (req, res) => {
 
 //get an album by id
 router.get('/:id', async (req, res) => {
-    const album = await Album.findById(req.params.id);
+    const album = await Album.findById(req.params.id).populate({
+        path: 'songs',
+        select: ["name", "duration"],
+
+    });
 
     return res.status(200).send(album)
 })
